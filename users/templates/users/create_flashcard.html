@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{%load static%}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{%static 'css/create_card.css/' %}">
+<div class="container">
+    <div class="form-container">
+        <h1>Flashcard Creation</h1>
+        <a href="{% url 'viewSet' title=title id=id%}"><button>Back</button></a>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+</div>
+
+{% endblock content%}

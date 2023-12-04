@@ -1,0 +1,141 @@
+
+
+.web-Container{
+    height: 600px;
+    /* border: solid 1px; */
+}
+
+.Container{
+    /* background-color: blue; */
+    /* border: solid 1px black; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.Quiztion-Logo{
+    width: 50%;
+    display: flex;
+    /* border: solid 1px black; */
+}
+
+.nav-bar{
+    
+    width: 120%;
+    justify-content: left;
+    display: inline-flex;
+    /* border: solid 1px black; */
+    transform: translate(50px,-15px)
+}
+
+.nav-items{
+    margin-top: 80px;
+    width: 60%;
+    display: flex; 
+    justify-content: space-evenly;
+    /* border: solid 1px black; */
+}
+
+.Middle{
+    /* border: solid 1px black; */
+    margin-top:0px;
+    height: 550px;
+    display:flex;
+}
+
+.Login-here{
+    transform: translateY(-50px);
+    width:80%;
+    height:100%;
+}
+
+.Login-hereForm{
+    transform: translateX(40px);
+}
+
+.image-holder{
+    width: 80%;
+    /* background-color: blue; */
+}
+
+/* Style for input boxes */
+input[type="text"],
+input[type="password"],
+/* Add more input types as needed */
+textarea {
+    border: solid 1px rgb(183, 177, 177);
+    border-radius: 10px;
+    width: 300px; /* Set the desired width */
+    padding: 8px; /* Add padding for better appearance */
+}
+
+
+
+    .form1{
+        transform: translate(230px,-50px);
+        margin-top: -50px;
+        /* transform: translateX(180px);
+        transform: translateY(-100px); */
+        
+    }
+
+    ul{
+        list-style-type: disc;
+        color: tomato;
+        font-size: 50px;
+    }
+
+.nav-btns{
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        color: steelblue;
+        transform: translateY(-5px);
+    }
+
+
+.flashcard-img{
+    width:100px;
+    height:150px;
+
+    transform: translate(30px,2px);
+}
+
+.image-holder{
+    /* border: solid 1px black; */
+    transform: translateY(-200px);
+}
+
+.credential-logo{
+    transform: translate(-35px,60px);
+    width: 35px;
+    height: auto;
+    
+}
+
+.password-label{
+    text-align: left !important;
+    display: block;
+    margin-top: -30px;
+}
+
+.small-image{
+    transform: translate(-150px,50px);
+    position: absolute;
+    width:1100px;
+    height: auto;
+    border: solid 1px black;
+    /* overflow: hidden; */
+    
+}
+
+.loginBTN{
+    width: 50px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: steelblue;
+    color: white;
+    font-size: 10px;
+    transform: translate(190px,-40px);
+    cursor: pointer;
+}

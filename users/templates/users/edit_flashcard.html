@@ -1,0 +1,18 @@
+
+{%load static%}
+
+{% block content %}
+
+<div class="container">
+    
+    <h1>Edit Flashcard</h1>
+    <!-- <a href="{%url 'dashboard'%}">Back</a> -->
+	<form method="post" novalidate>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit" />
+    </form>
+    
+</div>
+
+{% endblock content%}

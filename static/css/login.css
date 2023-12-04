@@ -1,0 +1,120 @@
+.test{
+    height: 100px;
+    width: auto;
+    /* background-color: black; */
+}
+
+.flashcard-img{
+    /* border: solid 1px black; */
+    height: 200px;
+    width: auto;
+    overflow:hidden;
+    transform: translateY(-10px);
+}
+
+.quiztion-logo{
+    display: inline-flex;
+}
+
+.searchBar{
+    height: 10px;
+    width: 220px;
+    border: solid 3px gray;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+.nav-a-btns{
+    text-decoration: none;
+}
+
+.nav-a-btns:visited{
+    color: inherit;
+}
+
+ul{
+    display: inline-flex;
+    list-style: disc;
+}
+
+ul li{
+    margin-left: 80px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #5271FF;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+ul li::marker{
+    color: #FF5757;
+    font-size: 30px;
+}
+
+.logoContainer{
+    display: inline-flex;
+    margin-top: 0px;
+    transform: translateY(-20px);
+    height: 220px;
+    /* border: solid 1px black; */
+    align-items: center;
+}
+
+.register-btn{
+    text-decoration: none;
+    background-color: #5271FF;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px black;
+    margin-left: 70px;
+}
+
+.login-btn{
+    padding: 13px;
+    width: 60px;
+    transform: translateX(280px);
+    background-color: #5271FF;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    margin-left: -20px;
+}
+
+form{
+    margin-top: -20px;
+    margin-left: 80px;
+}
+
+.container{
+    /* border: solid 1px black; */
+    padding-top: 2rem;
+    padding-left: 5rem;
+    /* background-color: black; */
+}
+
+.middle{
+    display: inline-flex;
+}
+
+.personflashcard-img{
+    transform: translate(500px,-100px);
+    height:600px;
+    width: auto;
+    /* border: solid 1px black; */
+}
+
+.Login{
+    font-size: 70px;
+}
+
+.form-container{
+    transform: translateY(-20px);
+    /* border: solid 1px black; */
+}
+
+input{
+    padding: 10px;
+    border-radius: 5px;
+    width: 400px;
+}
+

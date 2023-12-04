@@ -1,0 +1,251 @@
+.rectangle-container {
+
+    width: 100%;
+
+    height: 100px;
+
+    background-color: #FFCC00;
+
+    border-radius: 5px;
+
+    margin-top: 20px;
+
+    margin-bottom: 5px; /* Add spacing at the bottom */
+
+}
+
+ 
+
+.content-left,
+
+.content-right {
+
+    width: 45%;
+
+    display: inline-block;
+
+    vertical-align: top;
+
+    box-sizing: border-box;
+
+}
+
+ 
+
+.left-box,
+
+.right-box {
+
+    width: 80%;
+
+    height: 45%;
+
+    margin: 10%;
+
+    box-sizing: border-box;
+
+}
+
+ 
+
+.rectangle-container {
+
+    width: 100%;
+
+    height: 150px;
+
+    background-color: #FFCC00;
+
+    border-radius: 10px;
+
+    margin-top: 20px;
+
+    box-sizing: border-box;
+
+    margin-top: 60px;
+
+}
+
+ 
+
+.socialText {
+
+    text-align: center;
+
+    font-style: bold;
+
+    color: #9F584E;
+
+    margin-top: 5px; /* Add spacing at the top */
+
+}
+
+ 
+
+.aboutTxt {
+
+    width: 600px;
+
+    margin-top: 0%;
+
+}
+
+.social-icons {
+
+    text-align: center;
+
+}
+
+ 
+
+.social-icons img {
+
+    width: 50px; /* Adjust the width as needed */
+
+    margin: 0 10px; /* Adjust the margin as needed to separate the icons */
+
+}
+
+ 
+
+.contact-box {
+
+    background-color: #F5F5F5;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    margin: 10px;
+
+}
+
+ 
+
+.contact-info {
+
+    margin-bottom: 10px;
+
+}
+
+ 
+
+.contact-info p {
+
+    font-size: 16px;
+
+    line-height: 1.4;
+
+ 
+
+}
+
+ 
+
+.email {
+
+    font-weight: bold;
+
+    color: #FF5757;
+
+    font-size: 18px; /* Adjust the font size as needed */
+
+}
+
+ 
+
+.thank-you {
+
+    border-radius: 10px;
+
+    padding: 0px;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+}
+
+ 
+
+.thank-you p {
+
+    font-size: 16px;
+
+    margin: 0;
+
+    line-height: 1.4;
+
+}
+
+.about-box {
+
+    position: relative;
+
+    background-color: white;
+
+    border: 6px solid #888;
+
+    border-radius: 10px;
+
+    margin-top: 20px;
+
+    box-sizing: border-box;
+
+    padding: 20px;
+
+    text-align: center;
+
+}
+
+ 
+
+.about-content {
+
+    font-size: 18px;
+
+    color: #9F584E;
+
+    line-height: 1.4;
+
+}
+
+ 
+
+.about-box::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background-color: #FFCC00;
+
+    transform: rotate(170deg);
+
+    z-index: -1;
+
+}
+
+.quiztion-text {
+
+    font-family: 'CustomFont', sans-serif;
+
+    font-style: italic;
+
+    font-weight: bold;
+
+    font-size: 18px;
+
+    color: #9F584E;
+
+}

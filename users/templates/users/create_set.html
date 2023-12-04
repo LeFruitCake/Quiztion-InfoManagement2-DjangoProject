@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{%load static%}
+
+{% block content %}
+<!-- <script src="{%static 'create_flashcard.js' %}"></script> -->
+<link rel="stylesheet" type="text/css" href="{%static 'css/createSet.css' %}">
+<div class="container">
+    <div class="sub-container">
+        <h1>Flashcard Set Creation</h1>
+        <h2 class="title-lbl">Set Title</h2>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <!-- {{form.as_p}} -->
+            <br><br>
+            {{form.as_p}}
+            <input style="margin-top: 20px;" class="submit-btn" type="submit" value="Submit" />
+        </form>
+        <div style="padding: 2rem;"><a href="{%url 'dashboard'%}"><h3>Back to Dashboard</h3></a></div>
+    </div>
+
+</div>
+
+{% endblock content%} 

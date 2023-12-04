@@ -1,0 +1,122 @@
+.container{
+    width: 100%;
+    height: 100lvh;
+}
+
+.test{
+    height: 100px;
+    width: auto;
+}
+
+.flashcard-img{
+    height: 200px;
+    width: auto;
+    overflow:hidden;
+}
+
+.quiztion-logo{
+    display: inline-flex;
+}
+
+.searchBar{
+    display: flex;
+    height: 10px;
+    width: 220px;
+    border: solid 3px gray;
+    border-radius: 5px;
+    margin-left: 50px;
+    align-items: center;
+}
+
+.nav-a-btns{
+    text-decoration: none;
+}
+
+.nav-a-btns:visited{
+    color: inherit;
+}
+
+ul{
+    display: flex;
+    list-style: disc;
+    /* border: solid 1px black; */
+    width: 100%;
+    justify-content: space-around;
+}
+
+ul li{
+    font-size:150%;
+    cursor: pointer;
+    color: #5271FF;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+ul li a:visited{
+    color: inherit;
+}
+
+ul li::marker{
+    color: #FF5757;
+    font-size: 100%px;
+}
+
+.logoContainer{
+    /* border: solid 1px black; */
+    display: flex;
+    height: fit-content;
+    width:100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.register-btn{
+    text-decoration: none;
+    background-color: #5271FF;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px black;
+    margin-left: 70px;
+}
+
+.login-btn{
+    padding: 13px;
+    width: 60px;
+    transform: translateX(280px);
+    background-color: #5271FF;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    margin-left: -20px;
+}
+
+form{
+    margin-top: -20px;
+    margin-left: 80px;
+}
+
+
+
+.middle{
+    margin-top: -50px;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+    max-height: 60%;
+}
+
+.personflashcard-img{
+    height:600px;
+    width: auto;
+}
+
+.Login{
+    font-size: 70px;
+}
+
+input{
+    padding: 10px;
+    border-radius: 5px;
+    width: 400px;
+}
+

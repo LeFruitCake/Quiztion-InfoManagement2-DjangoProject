@@ -1,0 +1,48 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{%static 'css/login_style.css/'%}">
+	</head>
+	<body>
+		<div class="container">
+			<div class="logoContainer">
+				<div class="quiztion-logo"><h1 style="font-size: 100px; color: #5271FF;">Quiz</h1><h1 style="color: #FF5757; font-size: 100px;">Tion</h1><img class="flashcard-img" src="{%static 'images/flashcard.png' %}"></div>
+				
+				<ul>
+					<li><a href="{%url 'about_us' %}" style="text-decoration: none;">About us</a></li>
+					<li>Upgrade</li>
+					<li>Customer Support</li>
+
+				</ul>
+				<input type="search" placeholder="Search..." class="searchBar">
+			</div>
+			
+
+			<div class="middle">
+				<div class="form-container">
+					<form method="POST"  novalidate>
+						{% csrf_token %}
+						<h2 class="Login">Login</h2>
+						{{form.as_p}}
+						{%if messages%}
+							{%for message in messages%}
+								{%if message.tags == 'failed'%}
+									<div style="color: red;">{{message}}</div>
+								{%endif%}
+							{%endfor%}
+						{%endif%}
+						<a href="{% url 'register' %}" class="register-btn">Register</a>
+						<input class="login-btn"  type="submit" value="Login" />
+						
+					</form>
+				</div>
+				<div class="personimg-holer">
+					<img class="personflashcard-img" src="{%static 'images/personflashcard.png'%}">
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

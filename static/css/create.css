@@ -1,0 +1,42 @@
+
+
+.container{
+    /* display: flex; */
+    text-align: center;
+    justify-items: center;
+    justify-content:     center;
+}
+
+
+form{
+    margin: 0 auto;
+}
+
+form input{
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-left: -180px;
+}
+
+form label{
+    font-size: 50px;
+    visibility: hidden;
+}
+
+
+.submit-btn{
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.submit-btn:hover{
+    color: white;
+    background-color: #5271FF;
+}
+
+.title-lbl{
+    margin-bottom: -50px;
+    font-size: 30px;
+}

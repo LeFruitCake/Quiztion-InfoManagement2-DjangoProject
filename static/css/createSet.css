@@ -1,0 +1,38 @@
+
+
+.container{
+    display: flex;
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+form input{
+    
+    padding: 1rem;
+    border-radius:20px;
+}
+
+form p{
+    margin-left: -170px;
+}
+
+form label{
+    font-size: 50px;
+    visibility: hidden;
+}
+
+
+.submit-btn{
+    cursor: pointer;
+}
+
+.submit-btn:hover{
+    color: white;
+    background-color: #5271FF;
+}
+
+.title-lbl{
+    margin-bottom: -50px;
+    font-size: 30px;
+}

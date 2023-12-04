@@ -1,0 +1,53 @@
+
+.container{
+    text-align: center;
+    /* background-color: rgba(255, 87, 87, 0.1); */
+}
+
+.Sign-up{
+    margin: 0 auto;
+}
+
+form{
+    text-align: left;
+    border: solid 3px #5271FF;
+    border-radius: 50px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 300px;
+    align-items: center;
+}
+
+input{
+    padding: 0.5rem;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.register-btn{
+    margin-left: 350px;
+    color: white;
+    background-color: #5271FF;
+    cursor: pointer;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 100px;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+
+.login-btn{
+    border: solid 1px black;
+    border-radius: 5px;
+    margin: 0 auto;
+    color: white;
+    background-color: #5271FF;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.label_tag{
+    margin-top: 20px;
+}

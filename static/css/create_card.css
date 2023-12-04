@@ -1,0 +1,55 @@
+.container{
+    width: 100%;
+    height: fit-content;
+    /* border: solid 1px black; */
+}
+
+.form-container{
+    margin: 0 auto;
+    /* border: solid 1px black; */
+    width: fit-content;
+}
+
+form{
+    /* border: solid 1px black; */
+    padding: 1rem;
+}
+
+input{
+    border-radius: 5px;
+    padding: 10px;
+}
+
+input[type="submit"]{
+    margin-left: 150px;
+    background: white;
+    width: 30%;
+    cursor: pointer;
+    color: black;
+}
+
+input[type="submit"]:hover{
+    color: white;
+    background-color: navy;
+}
+
+label{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+textarea{
+    border-radius: 5px;
+    padding: 10px;
+}
+
+button{
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    color: white;
+    background-color: navy;
+}

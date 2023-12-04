@@ -1,0 +1,129 @@
+.container{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* border: solid 1px black; */
+    display: flex;
+    flex-direction: column;
+}
+
+.cards-container{
+    display: flex;  
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* justify-content: space-between; */
+    /* background-color:rgb(246, 246, 243); */
+}
+
+
+.flashcard{
+    display: inline-block;
+    border: solid 3px black;
+    width: 220px;
+    height: 300px;
+    border-radius: 10px;
+    margin: 10px;
+    background: white;
+}
+
+
+.answer{
+    padding: 5px;
+}
+
+
+
+
+.answer{
+    word-wrap: break-word;
+    overflow-y: hidden;
+    max-height: 150px;
+}
+
+
+
+.parent-addbtn a{
+    text-decoration: none;
+}
+
+
+.parent-addbtn a:visited{
+    color: inherit;
+}
+
+
+.parent-addbtn a .add-btn{
+    /* border: solid 3px black; */
+    height: 80px;
+    width: 130px;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.parent-addbtn a .add-btn p{
+    transform: translateY(15px);
+}
+
+.parent-addbtn{
+    border: solid 1px black;
+    width: 130px;
+    border-radius: 5px;
+}
+.parent-addbtn:hover{
+    color: white;
+    background: #5271FF;
+}
+#top-bar{
+    border-bottom: solid 2px black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px;
+    width: 100%;
+    /* align-self: center; */
+}
+
+#view-flashcard-addBTN{
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    outline: solid 1px black;
+    cursor: pointer;
+    font-size: 15px;
+    outline-color: #5271FF;
+    background-color: white;
+    color: #5271FF;
+}
+#view-flashcard-addBTN:hover{
+    transition: linear 0.1s;
+    background-color: #5271FF;
+    color:white;
+}
+
+#view-flashcard-subcontainer{
+    width: 80%;
+    align-self: center;
+    /* border: solid 1px  black; */
+}
+.delete-btn button{
+    text-decoration: none;
+    background-color:transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+}
+.delete-btn button:hover{
+    background-color: silver;
+}
+#delete-btn,#edit-btn{
+    cursor: pointer;
+}
+#flashcard-head{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-bottom: solid 1px black;
+    padding: 2px;
+    height: fit-content;
+}

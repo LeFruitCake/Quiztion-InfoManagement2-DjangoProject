@@ -1,0 +1,31 @@
+
+
+#import-set-container{
+    width: 100%;
+    height: 80dvh;
+    display: flex;
+    /* border: solid 1px black; */
+}
+
+#import-set-subcontainer{
+    width: 40%;
+    height: fit-content;
+    border-radius: 25px;
+    margin: 0 auto;
+    margin-top: 50px;
+    border: solid 1px black;
+    text-align: center;
+    justify-content: center;
+}
+
+h4{
+    font-size: 30px;
+}
+
+input{
+    border-radius: 20px;
+    width: 80%;
+    height: 25px;
+    font-size: 20px;
+    padding: 20px;
+}

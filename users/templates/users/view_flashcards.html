@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block content%}
+    <link rel="stylesheet" type="text/css" href="{%static 'css/flashcards.css' %}">
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+            document.getElementById("view-flashcard-addBTN").addEventListener("click", function() {
+                var url = "{% url 'createCard' title=title id=id %}";
+                window.location.href = url;
+            });
+        })
+    </script>
+    <div class="container">
+        <div id="view-flashcard-subcontainer">
+            <div id="top-bar">
+                <div>
+                    <h1>{{title}}</h1>
+                </div>
+                <div style="width: fit-content;">
+                    <button id="view-flashcard-addBTN">Add</button>
+                    <button id="view-flashcard-addBTN">Share</button>
+                    <button id="view-flashcard-addBTN">Copy</button>
+                </div>
+            </div>
+            <div class="cards-container"> 
+                    {% for flashcard in flashcards%}
+                    {% if flashcard.setTitle.id == id %}
+                            <div class="flashcard">
+                                <div id="flashcard-head">
+                                    <div style="align-self: flex-end;">
+                                        <a class="delete-btn" href="{%url 'delete_card' title=title set_id=id flashcard_id=flashcard.id %}"><button id="delete-btn"><img alt="deleteIcon" src="{%static 'images/trash-fill.svg' %}" /></button></a>
+                                        <a class="delete-btn" href="{%url 'edit_card' set_id=id flashcard_id=flashcard.id %}"><button id="edit-btn"><img  alt="editIcon" src="{%static 'images/pencil-fill.svg' %}" /></button></a>
+                                    </div>
+
+                                    <div style="font-size: 30px;margin-left: 10px;overflow: hidden;">
+                                        {{ flashcard.question }}
+                                    </div>
+                                </div>
+                                <div class="answer">
+                                    
+                                    <p class="answer">{{ flashcard.answer }}</p>
+                                </div>
+                            </div>
+                    
+                    {% endif %}
+                
+                    {% endfor%}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

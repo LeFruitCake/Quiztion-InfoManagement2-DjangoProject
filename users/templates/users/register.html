@@ -1,0 +1,32 @@
+
+
+{%load static%}
+
+<!DOCTYPE html>
+
+<html>
+	<body>
+		<head>
+			<link rel="stylesheet" type="text/css" href="{% static 'css/reg.css' %}">
+		</head>
+		<div class="container">
+
+			<h1 class="Sign-up">Sign Up</h1>
+			<br>
+			
+			<form method="POST" novalidate>
+				{% csrf_token %}
+				
+				{{ form.username.label_tag }}<br> {{ form.username }}<br><br>
+				{{ form.email.label_tag }}<br> {{ form.email }}<br><br>
+				{{ form.password1.label_tag }}<br> {{ form.password1 }}<br><br>
+				{{ form.password2.label_tag }}<br> {{ form.password2 }}<br>	<br>
+				<input class="register-btn" type="submit" value="Register" />
+				
+			</form>
+			<h2>Already have an account?</h2>
+			<a class="login-btn" href="{% url 'login' %}" >Login</a>
+		
+		</div>
+	</body>
+</html>

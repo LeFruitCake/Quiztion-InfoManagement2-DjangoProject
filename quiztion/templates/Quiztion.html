@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        
+        <link rel="stylesheet" type="text/css" href="{%static 'Quiztion.css' %}">
+    </head>
+
+    <body>
+        <div class="web-Container">
+            <div class="Container">
+                <div class="Quiztion-Logo">
+                    <div style="display: inline-flex; margin: 0 auto;">
+                        <h3 style="font-size: 60px; color:tomato; transform: translateX(30px);">Quiz</h3><h3 style="font-size: 60px; color:steelblue; transform: translateX(30px);">Tion</h3>
+                        <img class="flashcard-img" src="{% static '/quiztion/static/public/flashcard.png' %}">
+                    </div>
+                </div>
+                <div class="nav-bar">
+                    <ul class="nav-items">
+                        <li ><button class="nav-btns">About Us</button></li>
+                        <li style="margin-left: 50px; cursor: pointer;"><button class="nav-btns">Register</button></li>
+                        <li style="margin-left: 50px; cursor: pointer;"><button class="nav-btns">Login</button></li>
+                    </ul>
+                    <!-- <i style="transform: translate(-20px,100px); font-size: 20px;">&#x1F50D;</i> -->
+                    <input type="text" id="search" name="search" style="height: 15px; width: 200px; margin-top: 90px;" placeholder="Search...">
+    
+                </div>
+            </div>
+    
+            <div class="Middle">
+                <div class="Login-here" >
+                    <div style="text-align: center; justify-content: space-evenly; " class="Login-hereForm" >
+                        <h1 style="font-size: 80px; color: steelblue; font-family:Times New Roman;">Login Here</h1>
+                        <div style="display: inline-flex; transform: translateY(-90px); font-size: 30px;"><h4 style="color:gray">Don't have Account ?</h4></div> <button style="cursor: pointer; transform: translateY(-90px); border: none; background-color: transparent;"><h3 style="font-size: 25px; color: dodgerblue;">Sign Up</h3></button>
+                        <div style="text-align: Left;" class="form1">
+                            <form >
+                                <img class="credential-logo" src="public/user.png">
+                                <label class="password-label" for="username" style="font-size: 25px; color: gray;">Username</label><br>
+                                <input type="text" id="username" name="username">
+                            </form>
+                            <form >
+                                
+                                <img class="credential-logo" src="../public/lock.png">
+                                <label class="password-label" for="password" style="font-size: 25px; color: gray" >Password</label><br>
+                                <input type="password" id="password" name="password">
+                            </form>
+                        </div>
+                        <button class="loginBTN">Login</button>
+    
+                    </div>
+                    <div>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+                <div class="image-holder">
+
+                    <img class="small-image" src="../public/6.png">
+                </div>
+    
+            </div>
+
+
+
+
+
+        </div>
+    </body>
+
+
+
+</html>

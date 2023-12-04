@@ -1,0 +1,331 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{%static 'css/prac.css' %}">
+        <script>
+            let count =0;
+            let flag = false;
+            let score = 0;
+            document.addEventListener("DOMContentLoaded", function() {
+                var enterKeyEvent = new KeyboardEvent('keypress', {
+                    key: 'Enter',
+                    code: 'Enter',
+                    which: 13,
+                    keyCode: 13,
+                    charCode: 13,
+                    bubbles: true
+                });
+
+                const answer = document.getElementById("answer-box");
+                const testbtn = document.getElementById("test-mode");
+                const reviewbtn = document.getElementById("review-mode");
+                const timedbtn = document.getElementById("timed-mode");
+                const nextbtn = document.getElementById("next-btn");
+                const previousbtn = document.getElementById("previous-btn");
+                const revealbtn = document.getElementById("reveal-btn");
+                const timer = document.getElementById("timer");
+                const timerbox = document.getElementById("timer-box");
+                const startbtn = document.getElementById("start-btn");
+                const retrybtn = document.getElementById("retry-btn");
+                timer.style.visibility = "hidden";
+                startbtn.style.visibility="hidden";
+                timerbox.style.visibility="hidden";
+                let testMode = true;//true by default since default mode is test
+                let reviewMode = false;
+                let timedMode = false;
+                let timeInterval;
+                let timeLeft = 0;
+                let timeCache;
+                var jsonData = JSON.parse('{{ pracset|escapejs|safe }}');
+                var questionElement = document.getElementById("flashcard");
+                nextbtn.style.visibility = "hidden"
+                previousbtn.style.visibility = "hidden"
+                revealbtn.style.visibility = "hidden"
+                document.getElementById("score").innerHTML = `Score: ${score} / ${jsonData.length}`
+                document.getElementById("popup-score").innerHTML = `${score} / ${jsonData.length}`
+                function toActiveColor(a){
+                    a.style.backgroundColor = "#FF5757"
+                    a.style.color = "white";
+                }
+                function toInactiveColor(a){
+                    a.style.backgroundColor = "white"
+                    a.style.color = "black"
+                }
+                toActiveColor(testbtn)//set test flag to active color since default mode is test mode
+                testbtn.onmouseenter = function(){
+                    if(!testMode){
+                        testbtn.style.backgroundColor = "rgb(246, 246, 243)";
+                        testbtn.style.color = "black";
+                    }
+                }
+                startbtn.addEventListener("click",function(){
+                    timeCache = parseInt(timerbox.value)
+                    timeLeft = parseInt(timerbox.value);
+                    if(timeLeft > 2 && timeLeft < 11){
+                        startbtn.style.visibility = "hidden";
+                        timerbox.disabled = true;
+                        console.log(timeLeft);
+                        timeInterval = setInterval(()=>{
+                            if(timeLeft <= 1){
+                                check();
+                                clearInterval(timeInterval)
+                                console.log("time interval hit")
+                                timerbox.style.backgroundColor = "tomato"
+                                timerbox.style.color = "white"
+                            }
+                            timeLeft--;
+                            timerbox.value = timeLeft;
+                        },1000);
+                    }else{
+                        alert("Invalid time input")
+                    }
+                })
+                testbtn.onmouseleave = function(){
+                    if(!testMode){
+                        testbtn.style.backgroundColor = "white";
+                    }
+                }
+                testbtn.onclick = function(){
+                    retrybtn.click();
+                    toActiveColor(testbtn)
+                    toInactiveColor(reviewbtn)
+                    toInactiveColor(timedbtn)
+                    testMode = true;
+                    reviewMode = false;
+                    timedMode = false;
+                    answer.style.visibility = "visible";
+                    nextbtn.style.visibility = "hidden";
+                    previousbtn.style.visibility = "hidden";
+                    revealbtn.style.visibility = "hidden";
+                    document.getElementById("score").style.visibility = "visible";
+                    timer.style.visibility = "hidden";
+                    startbtn.style.visibility="hidden";
+                    timerbox.style.visibility="hidden";
+                    resetInputField();
+                }
+                reviewbtn.onmouseenter = function(){
+                    if(!reviewMode){
+                        reviewbtn.style.backgroundColor = "rgb(246, 246, 243)";
+                        reviewbtn.style.color = "black";
+                    }
+                }
+                reviewbtn.onmouseleave = function(){
+                    if(!reviewMode){
+                        reviewbtn.style.backgroundColor = "white";
+                    }
+                }
+                reviewbtn.onclick = function(){
+                    retrybtn.click();
+                    toActiveColor(reviewbtn)
+                    toInactiveColor(testbtn)
+                    toInactiveColor(timedbtn)
+                    testMode = false;
+                    reviewMode = true;
+                    timedMode = false;
+                    answer.style.visibility = "hidden";
+                    nextbtn.style.visibility = "visible";
+                    previousbtn.style.visibility = "visible";
+                    revealbtn.style.visibility = "visible";
+                    document.getElementById("score").style.visibility = "hidden";
+                    timer.style.visibility = "hidden";
+                    startbtn.style.visibility="hidden";
+                    timerbox.style.visibility="hidden";
+                }
+                timedbtn.onmouseenter = function(){
+                    if(!timedMode){
+                        timedbtn.style.backgroundColor = "rgb(246, 246, 243)";
+                        timedbtn.style.color = "black";
+                    }
+                }
+                timedbtn.onmouseleave = function(){
+                    if(!timedMode){
+                        timedbtn.style.backgroundColor = "white";
+                    }
+                }
+                timedbtn.onclick = function(){
+                    retrybtn.click();
+                    toActiveColor(timedbtn)
+                    toInactiveColor(testbtn)
+                    toInactiveColor(reviewbtn)
+                    testMode = false;
+                    reviewMode = false;
+                    timedMode = true;
+                    answer.style.visibility = "visible";
+                    nextbtn.style.visibility = "hidden";
+                    previousbtn.style.visibility = "hidden";
+                    revealbtn.style.visibility = "hidden";
+                    document.getElementById("score").style.visibility = "visible"
+                    timer.style.visibility = "visible";
+                    startbtn.style.visibility="visible";
+                    timerbox.style.visibility="visible";
+                    resetInputField();
+                }
+
+                function resetInputField() {
+                    const inputField = document.getElementById("answer-box");
+                    inputField.value = "";
+                    inputField.style.backgroundColor = "white";
+                    inputField.style.color = "black";
+                    inputField.disabled = false;
+                    inputField.focus();
+                }
+                nextbtn.addEventListener("click",function(){
+                    resetInputField();
+                    if(timedMode){
+                        console.log(timeCache)
+                        timerbox.style.backgroundColor = "white"
+                        timerbox.style.color = "black"
+                        timerbox.value = timeCache;
+                        startbtn.click();
+                    }
+                    if(!reviewMode){
+                        nextbtn.style.visibility = "hidden"
+                        previousbtn.style.visibility = "hidden"
+                        revealbtn.style.visibility = "hidden"
+                    }
+                    if(jsonData.length>1 && count < jsonData.length-1){
+                        count++;
+                        document.getElementById("label").innerHTML="Question"
+                        questionElement.textContent = jsonData[count].fields.question;
+                        if(count==jsonData.length-1){
+                            nextbtn.style.visibility = "hidden"
+                            if(reviewMode){
+                                previousbtn.style.visibility = "visible"
+                            }
+                        }
+                    }
+                })
+                revealbtn.addEventListener("click",function(){
+                    if(count<jsonData.length && flag==false){
+                        document.getElementById("label").innerHTML = "Answer"
+                        questionElement.textContent = jsonData[count].fields.answer;
+                        flag=true;
+                    }else{
+                        document.getElementById("label").innerHTML = "Question"
+                        questionElement.textContent = jsonData[count].fields.question;
+                        flag=false;
+                    }
+                })
+                previousbtn.addEventListener("click",function(){
+                    resetInputField();
+                    if(!reviewMode){
+                        nextbtn.style.visibility = "hidden"
+                        previousbtn.style.visibility = "hidden"
+                        revealbtn.style.visibility = "hidden"
+                    }
+                    if(count>0){
+                        count--;
+                        document.getElementById("label").innerHTML="Question"
+                        questionElement.textContent = jsonData[count].fields.question;
+                        if(count==0){
+                            previousbtn.style.visibility = "hidden"
+                            nextbtn.style.visibility = "visible"
+                        }
+                    }
+                })
+                function check(){
+                    document.getElementById("answer-box").disabled = true;
+                    if(answer.value == jsonData[count].fields.answer){
+                            document.getElementById("answer-box").style.backgroundColor = "limegreen"
+                            document.getElementById("answer-box").style.color = "white"
+                            score++;
+                            document.getElementById("score").innerHTML = `Score: ${score} / ${jsonData.length}`
+                            document.getElementById("popup-score").innerHTML = `${score} / ${jsonData.length}`
+                        }else{
+                            document.getElementById("answer-box").style.backgroundColor = "tomato"
+                            document.getElementById("answer-box").style.color = "white"
+                        }
+                        if(jsonData.length>1 && count < jsonData.length-1){
+                            nextbtn.style.visibility = "visible"
+                            revealbtn.style.visibility = "visible"
+                        }
+                        if(count == jsonData.length -1){
+                            document.getElementById("popup").style.visibility = "visible"
+                        }
+                }
+                document.getElementById("answer-box").addEventListener("keydown",(event)=>{
+                    
+                    if(event.key == "Enter"|| event.keyCode == 13){
+                        clearInterval(timeInterval);
+                        check();
+                    }
+                })
+                document.getElementById("close-btn").addEventListener("click",function(){
+                    document.getElementById("popup").style.visibility = "hidden";
+                })
+                document.getElementById("b2dashboard").addEventListener("click",function(){
+                    window.location.href = "{%url 'dashboard'%}"
+                })
+                retrybtn.addEventListener("click",function(){
+                    resetInputField();
+                    timerbox.disabled = false;
+                    startbtn.style.visibility = "visible"
+                    timerbox.style.backgroundColor = "white"
+                    timerbox.style.color = "black"
+                    timerbox.value = 3;
+                    count = 0;
+                    questionElement.textContent = jsonData[count].fields.question;
+                    score = 0;
+                    document.getElementById("score").innerHTML = `Score: ${score} / ${jsonData.length}`
+                    document.getElementById("popup-score").innerHTML = `${score} / ${jsonData.length}`
+                    document.getElementById("popup").style.visibility="hidden";
+                })
+                document.getElementById("label").innerHTML = "Question"
+                questionElement.innerHTML = jsonData[count].fields.question;
+            });
+        </script>
+    </head>
+    <body>
+        <div id="container">
+
+            <div id="popup">
+                <div class="popup-content">
+                    <div class="popup-topper">
+                        <button id="close-btn">X</button>
+                    </div>
+                    <div id="popup-content">
+                        <div>
+                            <h2>Your Score</h2>
+                        </div>
+                        <div id="popup-score-div">
+                            <h1 id="popup-score"></h1>  
+                        </div>
+                        <div id="popup-btns">
+                            <button id="b2dashboard">Back to Dashboard</button>
+                            <button id="retry-btn">Retry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="score" id="scorediv">
+                <a href="{% url 'dashboard'%}">Back to Dashboard</a>
+                <div class="modes">
+                    <button id="test-mode">Test Mode</button>
+                    <button id="review-mode">Review Mode</button>
+                    <button id="timed-mode">Timed Mode</button>
+                </div>
+                <h2 id="score"></h2>
+            </div>
+            <div class="sub-container">
+                <h1 id="timer">Timer</h1>
+                <input id="timer-box" type="number" placeholder="search" max="10" min="3" value="3">
+                <button id="start-btn">Start</button>
+                <div class="middle">
+                    <div class="flashcard-container" id="flashcard-container">
+                            <h1 id="label"></h1>
+                            <h1 id="flashcard"></h1>
+                    </div>
+                </div>
+                <div class="rvl">
+                    <button id="reveal-btn">Reveal</button>
+                </div>
+                <div class="input-box">
+                    <button id="previous-btn">Previous</button>
+                    <input type="text" id="answer-box" autofocus name="answer-box">
+                    <button id="next-btn">Next</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
