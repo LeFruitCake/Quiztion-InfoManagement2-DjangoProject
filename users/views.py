@@ -11,6 +11,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 import uuid
 from django.template.defaultfilters import yesno
+from django.db.models import Q
 
 
 def premium_upgrade(request,user_id):
@@ -102,8 +103,8 @@ def createSet(request):
                     return render(request, 'users/create_set.html', {'form': form,'message':message})
             if message == None:
                 card_set = form.save(commit=False)
+                card_set.author = request.user
                 card_set.save()
-                card_set.author.add(request.user)
                 return redirect('dashboard')
         
         
@@ -173,9 +174,15 @@ def editSet(request,id):
 
 @login_required
 def viewSet(request,title,id):
+    user = None
+    flashcard_set = get_object_or_404(FlashcardSets, id=id)
     if(request.method == 'GET'):
-        flashcards = Flashcard.objects.all()
-        context = {'flashcards':flashcards,'title':title,'id':id}
+        flashcards = Flashcard.objects.filter(setTitle__id=id)
+        if request.user == flashcard_set.author:
+            user = 'true'
+        else:
+            user = 'false'
+        context = {'flashcards':flashcards,'title':title,'id':id,'user':user,'shareKey':flashcard_set.shareKey}
         return render(request,'users/view_flashcards.html',context)
 
 @login_required
@@ -215,21 +222,44 @@ def sign_up(request):
 
 @login_required
 def dashview(request):
-    # if request.method == 'GET':
-        sets = FlashcardSets.objects.filter(author__username=request.session['username'])
-        quantity = {}
-        user = User.objects.get(username=request.session['username'])
-        premiumUser = None
-        try:
-            premiumUser = PremiumAccount.objects.get(user = user)
-        except PremiumAccount.DoesNotExist:
-            premiumUser = False
-        for set in sets:
-            flashcards_count = Flashcard.objects.filter(setTitle=set).count()
-            quantity[set] = flashcards_count
-        context = {'posts':sets,'quantity':quantity,'isPremium':request.session['isPremium']}
+    user = User.objects.get(username=request.session['username'])
+
+    # Filter sets created by the user or where the user has access
+    sets = FlashcardSets.objects.filter(
+        Q(author=user) | Q(access=user)
+    ).distinct()
+
+    quantity = {}
+    premiumUser = None
+
+    try:
+        premiumUser = PremiumAccount.objects.get(user=user)
+    except PremiumAccount.DoesNotExist:
+        premiumUser = False
+
+    for set in sets:
+        flashcards_count = Flashcard.objects.filter(setTitle=set).count()
+        quantity[set] = flashcards_count
+
+    context = {'posts': sets, 'quantity': quantity, 'isPremium': request.session['isPremium']}
+    return render(request, 'users/dashboard.html', context)
+# def dashview(request):
+#     # if request.method == 'GET':
+#         sets = FlashcardSets.objects.filter(author__username=request.session['username'])
         
-        return render(request,'users/dashboard.html',context)
+#         quantity = {}
+#         user = User.objects.get(username=request.session['username'])
+#         premiumUser = None
+#         try:
+#             premiumUser = PremiumAccount.objects.get(user = user)
+#         except PremiumAccount.DoesNotExist:
+#             premiumUser = False
+#         for set in sets:
+#             flashcards_count = Flashcard.objects.filter(setTitle=set).count()
+#             quantity[set] = flashcards_count
+#         context = {'posts':sets,'quantity':quantity,'isPremium':request.session['isPremium']}
+        
+#         return render(request,'users/dashboard.html',context)
 
 
 def about_us(request):
@@ -256,5 +286,6 @@ def import_set(request):
 def import_setShareKey(request,shareKey):
     flashcard_set = get_object_or_404(FlashcardSets, shareKey=shareKey)
     if request.user.is_authenticated:
-        flashcard_set.author.add(request.user)
+        if request.user != flashcard_set.author:
+            flashcard_set.access.add(request.user)
     return redirect('dashboard')

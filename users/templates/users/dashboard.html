@@ -8,40 +8,36 @@
     <div class="container">
         <div class="main-func">
             {% for post in posts%}
-                {% for owners in post.author.all%}
-                    {%if owners.username == request.session.username%}
-                        <div class="set-container">
-                            <a class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}"><div><h1 class="title-set">{{ post.setTitle }}</h1>
-                            {%for setTitle,count in quantity.items%}
-                                {%if setTitle.setTitle == post.setTitle%}
-                                    <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
-                                {%endif%}
-                            {%endfor%}
-                            </div></a>
-                            <a class="edit-btn" style="margin-top: -15px;" href="{% url 'edit_set' id=post.id %}"><p>Edit</p></a>
-                            <a class="delete-btn" style="margin-top: -15px;" href="{% url 'delete_set' id=post.id %}"><p>Delete</p></a>
-                            <a class="practice-btn" style="margin-top: -15px;" href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
-                        </div>
-                    {%endif%}
-                {%endfor%}
-                <!-- {% if post.author.username == request.session.username %}
-                    
-                        <div class="set-container">
-                            <a class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}"><div><h1 class="title-set">{{ post.setTitle }}</h1>
-                            {%for setTitle,count in quantity.items%}
-                                {%if setTitle.setTitle == post.setTitle%}
-                                     <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
-                                {%endif%}
-                            {%endfor%}
-                            </div></a>
-                            <a class="edit-btn" style="margin-top: -15px;" href="{% url 'edit_set' id=post.id %}"><p>Edit</p></a>
-                            <a class="delete-btn" style="margin-top: -15px;" href="{% url 'delete_set' id=post.id %}"><p>Delete</p></a>
-                            <a class="practice-btn" style="margin-top: -15px;" href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
-                        </div>
-                {% endif %} -->
-            {%empty%}
-                <div style="width: 832px;"><h2 style="text-align: center; font-size: 30px;">Your set list came up empty.</h2></div>
+                {%if post.author.username == request.session.username%}
+                    <div class="set-container">
+                        <a class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}"><div><h1 class="title-set">{{ post.setTitle }}</h1>
+                        {%for setTitle,count in quantity.items%}
+                            {%if setTitle.setTitle == post.setTitle%}
+                                <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
+                            {%endif%}
+                        {%endfor%}
+                        </div></a>
+                        <a class="edit-btn" style="margin-top: -15px;" href="{% url 'edit_set' id=post.id %}"><p>Edit</p></a>
+                        <a class="delete-btn" style="margin-top: -15px;" href="{% url 'delete_set' id=post.id %}"><p>Delete</p></a>
+                        <a class="practice-btn" style="margin-top: -15px;" href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
+                    </div>
+                {%endif%}
 	        {% endfor%}
+            {% for post in request.user.setAccess.all%}
+                        <div class="set-container">
+                            <a class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}">
+                                <div><h1 class="title-set">{{ post.setTitle }}</h1>
+                                    {%for setTitle,count in quantity.items%}
+                                        {%if setTitle.setTitle == post.setTitle%}
+                                            <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
+                                        {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </a>
+                            <a class="practice-btn" style="margin-top: -15px; " href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
+                        </div>
+                        
+                {%endfor%}
             <a class="createSet-btn" href="{% url 'createSet' %}">Create Set</a>
         </div>
         

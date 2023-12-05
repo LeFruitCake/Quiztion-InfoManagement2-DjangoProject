@@ -7,7 +7,8 @@ def generate_uuid():
 
 class FlashcardSets(models.Model):
     setTitle = models.CharField(max_length=120)
-    author = models.ManyToManyField(User)
+    author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='setOwner')
+    access = models.ManyToManyField(User, related_name='setAccess')
     shareKey = models.CharField(max_length=50, default=generate_uuid, null=False)
 
 
