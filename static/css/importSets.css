@@ -13,9 +13,32 @@
     border-radius: 25px;
     margin: 0 auto;
     margin-top: 50px;
-    border: solid 1px black;
+    /* border: solid 1px black; */
+    /* background-color: black; */
     text-align: center;
     justify-content: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+form button{
+    border: solid 2px #5271FF;
+    background-color: white;
+    padding: 10px;
+    /* color: white; */
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+form button:hover{
+    background-color: #5271FF;
+    color: white;
 }
 
 h4{

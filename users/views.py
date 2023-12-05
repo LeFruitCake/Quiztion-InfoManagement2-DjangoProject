@@ -102,8 +102,8 @@ def createSet(request):
                     return render(request, 'users/create_set.html', {'form': form,'message':message})
             if message == None:
                 card_set = form.save(commit=False)
-                card_set.author = request.user
                 card_set.save()
+                card_set.author.add(request.user)
                 return redirect('dashboard')
         
         
@@ -252,3 +252,9 @@ def practice_set(request,setID):
 def import_set(request):
     if request.method == 'GET':
         return render(request,'users/importSet.html')
+    
+def import_setShareKey(request,shareKey):
+    flashcard_set = get_object_or_404(FlashcardSets, shareKey=shareKey)
+    if request.user.is_authenticated:
+        flashcard_set.author.add(request.user)
+    return redirect('dashboard')

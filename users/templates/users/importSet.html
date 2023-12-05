@@ -2,12 +2,22 @@
 
 {% load static %}
 {%block content%}
-<link rel="stylesheet" type="text/css" href="{%static 'css/importSet.css' %}">
-<div id="import-set-container">
-    <div id="import-set-subcontainer">
-        <h4>Import Flashcard Set</h4>
-        <input type="search" />
+    <link rel="stylesheet" type="text/css" href="{%static 'css/importSets.css/' %}">
+    <div id="import-set-container">
+        <div id="import-set-subcontainer">
+            <h1>Import Flashcard Set</h1>
+            <form action="{% url 'importShareKey' shareKey='PLACEHOLDER' %}" method="post" id="import-form">
+                {% csrf_token %}
+                <input type="text" name="shareKeyInputField" />
+                <button type="submit">Import</button>
+            </form>
+        </div>
     </div>
-</div>
-
+    <script>
+        document.getElementById("import-form").addEventListener("submit", function () {
+            var shareKeyInput = document.querySelector("input[name='shareKeyInputField']");
+            var importForm = document.getElementById("import-form");
+            importForm.action = importForm.action.replace('PLACEHOLDER', shareKeyInput.value);
+        });
+    </script>
 {%endblock content%}

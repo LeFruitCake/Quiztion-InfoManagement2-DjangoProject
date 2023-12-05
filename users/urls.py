@@ -19,5 +19,6 @@ urlpatterns = [
     path('setPremium/<int:user_id>',views.setPremium,name='setPremium'),
     path('about/',views.about_us, name="about_us"),
     path('import',views.import_set,name='importSet'),
+    path('import/importSetKey/<str:shareKey>',views.import_setShareKey,name='importShareKey')
 ]
 
