@@ -5,6 +5,11 @@ import uuid
 def generate_uuid():
     return str(uuid.uuid4())
 
+
+class ProfilePhoto(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='uploads/')
+
 class FlashcardSets(models.Model):
     setTitle = models.CharField(max_length=120)
     author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='setOwner')
