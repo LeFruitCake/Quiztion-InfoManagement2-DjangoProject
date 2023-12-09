@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.http import HttpResponse
-from .models import User, FlashcardSets, Flashcard, PremiumAccount
+from .models import User, FlashcardSets, Flashcard, PremiumAccount, ProfilePhoto
 from .forms import RegisterForm, LoginForm, CardSetForm, FlashcardForm, PremiumForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
@@ -223,7 +223,7 @@ def sign_up(request):
 @login_required
 def dashview(request):
     user = User.objects.get(username=request.session['username'])
-
+    photo = ProfilePhoto.objects.filter(owner=request.user).first()
     # Filter sets created by the user or where the user has access
     sets = FlashcardSets.objects.filter(
         Q(author=user) | Q(access=user)
@@ -231,7 +231,10 @@ def dashview(request):
 
     quantity = {}
     premiumUser = None
-
+    # if photo:
+    #     photo = photo
+    # else:
+    #     photo = None
     try:
         premiumUser = PremiumAccount.objects.get(user=user)
     except PremiumAccount.DoesNotExist:
@@ -241,7 +244,7 @@ def dashview(request):
         flashcards_count = Flashcard.objects.filter(setTitle=set).count()
         quantity[set] = flashcards_count
 
-    context = {'posts': sets, 'quantity': quantity, 'isPremium': request.session['isPremium']}
+    context = {'posts': sets, 'quantity': quantity, 'isPremium': request.session['isPremium'],'photo':photo}
     return render(request, 'users/dashboard.html', context)
 # def dashview(request):
 #     # if request.method == 'GET':

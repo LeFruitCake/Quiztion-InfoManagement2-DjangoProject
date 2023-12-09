@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block content%}
-    <link rel="stylesheet" type="text/css" href="{%static 'css/dashboard.css/' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/dashboard.css' %}">
     <div class="container">
         <div class="main-func">
             {% for post in posts%}
@@ -39,6 +39,14 @@
                         
                 {%endfor%}
             <a class="createSet-btn" href="{% url 'createSet' %}">Create Set</a>
+        </div>
+        <div id="dashboard-rightside">
+            {% if photo %}
+                <img id="userPhoto" src="{{photo.image.url}}"/>
+            {% else %}
+                <img id="userPhoto" src="{%static 'images/noProfile.jpg'%}"/>
+            {% endif %}
+            <h1>{{request.user}}</h1>
         </div>
         
     </div>

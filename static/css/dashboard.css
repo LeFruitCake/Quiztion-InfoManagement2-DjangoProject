@@ -6,6 +6,7 @@ body{
 .container{
     width: 100%;
     height: 100px;
+    display: flex;
     /* background-color: black; */
     /* border: solid 1px black; */
 }
@@ -172,6 +173,7 @@ h3:visited{
     flex-direction: column;
     gap: 10;
     width: fit-content;
+    height: fit-content;
     padding: 20px;
     background-color: white;
     margin-top: 10px;
@@ -206,4 +208,20 @@ h3:visited{
 
 .createSet-btn a:visited{
     color: inherit;
+}
+
+#dashboard-rightside{
+    padding-top: 2%;
+    /* border: solid 1px black; */
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#userPhoto{
+    width: 50%;
+    border-radius: 50%;
+    /* border: solid 1px black; */
 }

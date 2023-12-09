@@ -8,7 +8,7 @@ def generate_uuid():
 
 class ProfilePhoto(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/')
+    image = models.ImageField(upload_to='images/')
 
 class FlashcardSets(models.Model):
     setTitle = models.CharField(max_length=120)
