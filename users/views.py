@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.http import HttpResponse
 from .models import User, FlashcardSets, Flashcard, PremiumAccount, ProfilePhoto
-from .forms import RegisterForm, LoginForm, CardSetForm, FlashcardForm, PremiumForm
+from .forms import RegisterForm, LoginForm, CardSetForm, FlashcardForm, PremiumForm, UpdateProfileForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -224,6 +224,7 @@ def sign_up(request):
 def dashview(request):
     user = User.objects.get(username=request.session['username'])
     photo = ProfilePhoto.objects.filter(owner=request.user).first()
+    
     # Filter sets created by the user or where the user has access
     sets = FlashcardSets.objects.filter(
         Q(author=user) | Q(access=user)
@@ -231,10 +232,6 @@ def dashview(request):
 
     quantity = {}
     premiumUser = None
-    # if photo:
-    #     photo = photo
-    # else:
-    #     photo = None
     try:
         premiumUser = PremiumAccount.objects.get(user=user)
     except PremiumAccount.DoesNotExist:
@@ -246,24 +243,6 @@ def dashview(request):
 
     context = {'posts': sets, 'quantity': quantity, 'isPremium': request.session['isPremium'],'photo':photo}
     return render(request, 'users/dashboard.html', context)
-# def dashview(request):
-#     # if request.method == 'GET':
-#         sets = FlashcardSets.objects.filter(author__username=request.session['username'])
-        
-#         quantity = {}
-#         user = User.objects.get(username=request.session['username'])
-#         premiumUser = None
-#         try:
-#             premiumUser = PremiumAccount.objects.get(user = user)
-#         except PremiumAccount.DoesNotExist:
-#             premiumUser = False
-#         for set in sets:
-#             flashcards_count = Flashcard.objects.filter(setTitle=set).count()
-#             quantity[set] = flashcards_count
-#         context = {'posts':sets,'quantity':quantity,'isPremium':request.session['isPremium']}
-        
-#         return render(request,'users/dashboard.html',context)
-
 
 def about_us(request):
     return render(request, "users/about.html")
@@ -292,3 +271,12 @@ def import_setShareKey(request,shareKey):
         if request.user != flashcard_set.author:
             flashcard_set.access.add(request.user)
     return redirect('dashboard')
+
+
+def editProfile(request):
+    if request.method == 'GET':
+        image = ProfilePhoto.objects.filter(owner=request.user).first()
+        form = UpdateProfileForm(instance = request.user)
+        print(form)
+        return render(request,'users/edit_profile.html',{'form':form,'photo':image})
+    # else:

@@ -4,37 +4,52 @@
 {% load static %}
 
 {% block content%}
-    <link rel="stylesheet" type="text/css" href="{%static 'css/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/1dashboard.css/' %}">
     <div class="container">
         <div class="main-func">
+            <h2 style="color: rgb(140, 131, 131);">Your Sets</h2>
             {% for post in posts%}
                 {%if post.author.username == request.session.username%}
                     <div class="set-container">
-                        <a class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}"><div><h1 class="title-set">{{ post.setTitle }}</h1>
-                        {%for setTitle,count in quantity.items%}
-                            {%if setTitle.setTitle == post.setTitle%}
-                                <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
-                            {%endif%}
-                        {%endfor%}
-                        </div></a>
-                        <a class="edit-btn" style="margin-top: -15px;" href="{% url 'edit_set' id=post.id %}"><p>Edit</p></a>
-                        <a class="delete-btn" style="margin-top: -15px;" href="{% url 'delete_set' id=post.id %}"><p>Delete</p></a>
-                        <a class="practice-btn" style="margin-top: -15px;" href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
+                        <div id="set-info">
+                            <a style="width: 100%;" class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}"><div><h1 class="title-set">{{ post.setTitle }}</h1>
+                                {%for setTitle,count in quantity.items%}
+                                    {%if setTitle.setTitle == post.setTitle%}
+                                        {%if count == 0%}
+                                            <h3 id="card-counter" style="color: rgb(218, 85, 85);">No Cards</h3>
+                                        {%else%}
+                                            <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
+                                        {%endif%}
+                                    {%endif%}
+                                {%endfor%}
+                            </div></a>
+                        </div>
+                        <div id="user-set-btns">
+                            <a class="edit-btn" style="margin-top: -15px;" href="{% url 'edit_set' id=post.id %}"><p>Edit</p></a>
+                            <a class="delete-btn" style="margin-top: -15px;" href="{% url 'delete_set' id=post.id %}"><p>Delete</p></a>
+                            <a class="practice-btn" style="margin-top: -15px;" href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
+                        </div>
                     </div>
                 {%endif%}
 	        {% endfor%}
+            <h2 style="color: rgb(140, 131, 131);">Imported Sets</h2>
             {% for post in request.user.setAccess.all%}
                         <div class="set-container">
-                            <a class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}">
-                                <div><h1 class="title-set">{{ post.setTitle }}</h1>
-                                    {%for setTitle,count in quantity.items%}
-                                        {%if setTitle.setTitle == post.setTitle%}
-                                            <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
-                                        {%endif%}
-                                    {%endfor%}
-                                </div>
-                            </a>
-                            <a class="practice-btn" style="margin-top: -15px; " href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
+                            <div id="set-info">
+                                <a style="width: 100%; height: 100%;" class="set-title" href="{% url 'viewSet' title=post.setTitle id=post.id %}">
+                                    <div style="width: fit-content;"><h1 class="title-set">{{ post.setTitle }}</h1>
+                                        {%for setTitle,count in quantity.items%}
+                                            {%if setTitle.setTitle == post.setTitle%}
+                                                <h3 id="card-counter" style="color: black;">{{count}} {%if count < 2%} Card {% else %}Cards {%endif%}</h3>
+                                            {%endif%}
+                                        {%endfor%}
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="imported-set-btns">
+                                <a class="practice-btn" style="margin-top: -15px; " href="{% url 'practice_set' setID=post.id %}"><p>Practice</p></a>
+                                <a class="remove-btn" style="margin-top: -15px;"><p>Remove</p></a>
+                            </div>
                         </div>
                         
                 {%endfor%}
@@ -46,7 +61,11 @@
             {% else %}
                 <img id="userPhoto" src="{%static 'images/noProfile.jpg'%}"/>
             {% endif %}
-            <h1>{{request.user}}</h1>
+            <h1 class="user-information">{{request.user}}</h1>
+            <div id='user-btns'>
+                <a class="user-buttons" href="{%url 'editProfile'%}">Edit Profile</a>
+                <a class="user-buttons">View Scores</a>
+            </div>
         </div>
         
     </div>

@@ -18,11 +18,13 @@ h2{
 
 .set-container{
     width: 800px;
+    display: flex;
     border: solid 1px black;
     margin-top: 10px;
     padding: 1rem;
     border-radius: 15px;
     background-color: white;
+    justify-content: space-between;
 }
 
 .set-container:hover{
@@ -105,6 +107,31 @@ h3:visited{
 
 .delete-btn:hover{
     background-color: red;
+    transition: ease-in;
+    transition-duration: 0.1s;
+    color: white;
+}
+
+.remove-btn{
+    display: inline-flex;
+    width: 80px;; 
+    height: 50px; 
+    font-size: 20px; 
+    text-decoration: none;
+    color:  orange;
+    border: solid 1px black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.remove-btn a:visited{
+    color: inherit;
+}
+
+.remove-btn:hover{
+    background-color: orange;
     transition: ease-in;
     transition-duration: 0.1s;
     color: white;
@@ -200,7 +227,7 @@ h3:visited{
 
 
 .createSet-btn:hover{
-    background-color: #FF5757;
+    background-color: #344ec5;
     transition: ease-in;
     transition-duration: 0.1s;
     color: white;
@@ -211,9 +238,12 @@ h3:visited{
 }
 
 #dashboard-rightside{
-    padding-top: 2%;
+    top: 100px;
+    position: sticky;
+    /* padding-top: 2%; */
     /* border: solid 1px black; */
-    height: fit-content;
+    width: 100%;
+    height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,3 +255,56 @@ h3:visited{
     border-radius: 50%;
     /* border: solid 1px black; */
 }
+
+
+#imported-set-btns{
+    /* border: solid 1px black; */
+    width: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#user-set-btns{
+    display: flex;
+    /* border: solid 1px black; */
+    width: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#set-info{
+    /* border: solid 1px black; */
+    width: 68%;
+}
+
+#user-information{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.user-buttons{
+    /* border: solid 1px black; */
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    cursor: pointer;
+    background-color: #5271FF;
+    color: white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.user-buttons:hover{
+    background-color: #344ec5;
+}
+
+#user-btns{
+    /* border: solid 1px black; */
+    display: flex;
+    gap: 15px;
+}
+
+

@@ -1,0 +1,42 @@
+
+
+#editProfileContainer{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    gap: 100px;
+}
+
+#id_username,#id_email,#id_first_name,#id_last_name{
+    padding: 8px;
+    border-radius: 5px;
+    width: 300px;
+    font-size: 20px;
+    margin-top: -7px;
+}
+
+#avatar{
+    width: 15%;
+    border-radius: 50%;
+    height: 15%;
+}
+
+
+
+
+#save-btn,#back-btn{
+    border: none;
+    color: white;
+    background-color: #5271FF;
+    padding: 10px;
+    font-size: 15px;
+    /* background-color: white; */
+    border-radius: 5px;
+    cursor: pointer;
+}
+#back-btn{
+    text-decoration: none;
+}
+#back-btn:visited{
+    color: inherit;
+}

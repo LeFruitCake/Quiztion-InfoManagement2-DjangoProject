@@ -29,3 +29,13 @@ class PremiumForm(ModelForm):
     class Meta:
         model = PremiumAccount
         fields = ['isPremium']
+
+
+class UpdateProfileForm(ModelForm):
+    ProfilePhoto = forms.ImageField(required=False,label='Avatar')
+    class Meta:
+        model = User
+        fields = ['username','email','first_name', 'last_name']
+    def __init__(self, *args, **kwargs):
+        super(UpdateProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['disabled'] = True
