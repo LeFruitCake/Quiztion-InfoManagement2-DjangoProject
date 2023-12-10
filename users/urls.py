@@ -21,5 +21,6 @@ urlpatterns = [
     path('import',views.import_set,name='importSet'),
     path('import/importSetKey/<str:shareKey>',views.import_setShareKey,name='importShareKey'),
     path('editprofile',views.editProfile,name='editProfile'),
+    path('changepassword',views.changePassword,name='changePassword'),
 ]
 

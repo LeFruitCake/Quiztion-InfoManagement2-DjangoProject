@@ -31,6 +31,10 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+#save-btn:hover,#back-btn:hover{
+    background-color: #344ec5;
+}
 #back-btn{
     text-decoration: none;
 }
@@ -42,4 +46,16 @@
     display: flex;
     /* border: solid 1px black; */
     gap: 50px;
+}
+
+
+
+#changePassword{
+    color: #5271FF;
+    /* text-decoration: none; */
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#changePassword:visited{
+    color: inherit;
 }

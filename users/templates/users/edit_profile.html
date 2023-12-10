@@ -11,13 +11,13 @@
         
         <form id="edit-form" method="post" action="{% url 'editProfile' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div style="display: flex;flex-direction: column;justify-content: center;">
+            <div style="display: flex;flex-direction: column;">
                 {% if photo %}
                     <img id="avatar" src="{{photo.image.url}}"/>
                 {% else %}
                     <img id="avatar" src="{%static 'images/noProfile.jpg'%}"/>
                 {% endif %}
-                <h4 style="margin-left: 30%;">Avatar</h4>
+                <h4 style="margin-left: 30%; font-size: 20px;">Avatar</h4>
                 {{ photo_form.image}}
             </div>
             <div style="display: flex; flex-direction: column; gap: 0px;">
@@ -30,7 +30,8 @@
                 {{ form.first_name }}
                 <h4>Last Name</h4>
                 {{ form.last_name }}
-                
+                <br>
+                <a href="{%url 'changePassword'%}" style="margin-top: 20px;margin-bottom: 20px; align-self: center; color: #5271FF;" id="changePassword"> Change Password</a>
                 <br>
                 <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
                     <a style="color: white;" id="back-btn" href="{% url 'dashboard' %}">Back</a>

@@ -14,6 +14,7 @@ from django.template.defaultfilters import yesno
 from django.db.models import Q
 import os
 from PIL import Image
+from django.contrib.auth.forms import SetPasswordForm
 
 
 def premium_upgrade(request,user_id):
@@ -301,3 +302,12 @@ def editProfile(request):
             return redirect('dashboard')
     print("nope")
     return redirect('dashboard')
+
+
+def changePassword(request):
+    if request.method == 'GET':
+        form = SetPasswordForm(request.user)
+        print(form)
+        return render(request,'users/changepassword.html',{'form':form})
+    else:
+        return redirect('editProfile')
