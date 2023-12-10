@@ -16,13 +16,10 @@
 }
 
 #avatar{
-    width: 15%;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    height: 15%;
 }
-
-
-
 
 #save-btn,#back-btn{
     border: none;
@@ -39,4 +36,10 @@
 }
 #back-btn:visited{
     color: inherit;
+}
+
+#edit-form{
+    display: flex;
+    /* border: solid 1px black; */
+    gap: 50px;
 }

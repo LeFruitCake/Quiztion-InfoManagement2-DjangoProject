@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.http import HttpResponse
 from .models import User, FlashcardSets, Flashcard, PremiumAccount, ProfilePhoto
-from .forms import RegisterForm, LoginForm, CardSetForm, FlashcardForm, PremiumForm, UpdateProfileForm
+from .forms import RegisterForm, LoginForm, CardSetForm, FlashcardForm, PremiumForm, UpdateProfileForm, ProfilePhotoForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -12,6 +12,8 @@ from django.conf import settings
 import uuid
 from django.template.defaultfilters import yesno
 from django.db.models import Q
+import os
+from PIL import Image
 
 
 def premium_upgrade(request,user_id):
@@ -272,11 +274,30 @@ def import_setShareKey(request,shareKey):
             flashcard_set.access.add(request.user)
     return redirect('dashboard')
 
-
 def editProfile(request):
     if request.method == 'GET':
-        image = ProfilePhoto.objects.filter(owner=request.user).first()
-        form = UpdateProfileForm(instance = request.user)
-        print(form)
-        return render(request,'users/edit_profile.html',{'form':form,'photo':image})
-    # else:
+        photo_instance = ProfilePhoto.objects.filter(owner=request.user).first()
+        user_form = UpdateProfileForm(instance=request.user)
+        photo_form = ProfilePhotoForm()
+        return render(request, 'users/edit_profile.html', {'form': user_form, 'photo_form': photo_form,'photo':photo_instance})
+    elif request.method == 'POST':
+        photo_instance = ProfilePhoto.objects.filter(owner=request.user).first()
+        user_form = UpdateProfileForm(request.POST, instance=request.user)
+        photo_form = ProfilePhotoForm(request.POST, request.FILES, instance=photo_instance)
+        if 'image' in request.FILES:
+            try:
+                os.remove(photo_instance.image.path)
+                print(photo_instance.image.path)
+            except Exception as e:
+                print(e)
+        if user_form.is_valid() and photo_form.is_valid():
+            photo = photo_form.save(commit=False)
+            photo.owner = request.user
+            photo.save()
+            user_form.save()
+            return redirect('dashboard')
+        else:
+            print("Form errors:", user_form.errors, photo_form.errors)
+            return redirect('dashboard')
+    print("nope")
+    return redirect('dashboard')
