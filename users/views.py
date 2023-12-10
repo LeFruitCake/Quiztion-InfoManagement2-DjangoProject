@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import User, FlashcardSets, Flashcard, PremiumAccount, ProfilePhoto
 from .forms import RegisterForm, LoginForm, CardSetForm, FlashcardForm, PremiumForm, UpdateProfileForm, ProfilePhotoForm
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core import serializers
@@ -307,7 +307,17 @@ def editProfile(request):
 def changePassword(request):
     if request.method == 'GET':
         form = SetPasswordForm(request.user)
-        print(form)
         return render(request,'users/changepassword.html',{'form':form})
     else:
-        return redirect('editProfile')
+        form = SetPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Important: update the session to prevent the user from being logged out
+            update_session_auth_hash(request, user)
+            print('password changed')
+            return redirect(to='editProfile')  # Redirect to a success page
+        else:
+            form = SetPasswordForm(request.user)
+            return render(request, 'users/changepassword.html', {'form': form,'message':'Password is too weak'})
+
+
